@@ -1,0 +1,2080 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Dialog widgets &mdash; pythondialog 3.4.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.4.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within pythondialog 3.4.0 documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="top" title="pythondialog 3.4.0 documentation" href="index.html" />
+    <link rel="next" title="The DialogBackendVersion class" href="DialogBackendVersion.html" />
+    <link rel="prev" title="Dialog class overview" href="Dialog_class_overview.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="DialogBackendVersion.html" title="The DialogBackendVersion class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Dialog_class_overview.html" title="Dialog class overview"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pythondialog 3.4.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-dialog-widgets">
+<span id="widgets"></span><h1>The <a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog" title="dialog.Dialog"><code class="xref py py-class docutils literal"><span class="pre">Dialog</span></code></a> widgets<a class="headerlink" href="#the-dialog-widgets" title="Permalink to this headline">¶</a></h1>
+<p>This section describes all widgets (or dialog boxes) offered by the
+<a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog" title="dialog.Dialog"><code class="xref py py-class docutils literal"><span class="pre">Dialog</span></code></a> class. The descriptions of many of them are adapted from the
+<em class="manpage">dialog(1)</em> manual page, with the kind permission of <a class="reference external" href="http://invisible-island.net/">Thomas Dickey</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All unqualified method names in this section are methods of the
+<a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog" title="dialog.Dialog"><code class="xref py py-class docutils literal"><span class="pre">Dialog</span></code></a> class. In other words, whenever a method <code class="xref py py-meth docutils literal"><span class="pre">foo()</span></code> is
+mentioned, you have to understand <code class="xref py py-meth docutils literal"><span class="pre">dialog.Dialog.foo()</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Concerning the older widgets that have fixed defaults for the length
+parameters such as <em>width</em> and <em>height</em>:</p>
+<p>Even though explicitely setting one of these length parameters to <code class="docutils literal"><span class="pre">None</span></code>
+will not cause any error in this version, please don&#8217;t do it. If you know
+the size you want, specify it directly (e.g., <code class="docutils literal"><span class="pre">width=78</span></code>). On the other
+hand, if you want <strong class="program">dialog</strong> to automagically figure out a suitable
+size, you have two options:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>either enable the <a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option and
+make sure not to specify the length parameter in the widget call;</li>
+<li>or explicitely set it to <code class="docutils literal"><span class="pre">0</span></code> (e.g., <code class="docutils literal"><span class="pre">width=0</span></code>).</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="displaying-multi-line-text">
+<h2>Displaying multi-line text<a class="headerlink" href="#displaying-multi-line-text" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="message-box">
+<h3>Message box<a class="headerlink" href="#message-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.msgbox">
+<code class="descclassname">Dialog.</code><code class="descname">msgbox</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.msgbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.msgbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a message dialog box, with scrolling and line wrapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Display <em>text</em> in a message box, with a scrollbar and percentage
+indication if <em>text</em> is too long to fit in a single &#8220;screen&#8221;.</p>
+<p>An <code class="xref py py-meth docutils literal"><span class="pre">msgbox()</span></code> is very similar to a <a class="reference internal" href="#dialog.Dialog.yesno" title="dialog.Dialog.yesno"><code class="xref py py-meth docutils literal"><span class="pre">yesno()</span></code></a> box. The
+only difference between an <code class="xref py py-meth docutils literal"><span class="pre">msgbox()</span></code> and a <code class="xref py py-meth docutils literal"><span class="pre">yesno()</span></code>
+box is that the former only has a single <span class="guilabel">OK</span> button.
+You can use <code class="xref py py-meth docutils literal"><span class="pre">msgbox()</span></code> to display any message you like.
+After reading the message, the user can press the <code class="kbd docutils literal"><span class="pre">Enter</span></code>
+key so that <strong class="program">dialog</strong> will exit and the calling program
+can continue its operation.</p>
+<p><code class="xref py py-meth docutils literal"><span class="pre">msgbox()</span></code> performs automatic line wrapping. If you want to
+force a newline at some point, simply insert it in <em>text</em>. In
+other words (with the default settings), newline characters in
+<em>text</em> <strong>are</strong> respected; the line wrapping process performed by
+<strong class="program">dialog</strong> only inserts <strong>additional</strong> newlines when
+needed. If you want no automatic line wrapping, consider using
+<a class="reference internal" href="#dialog.Dialog.scrollbox" title="dialog.Dialog.scrollbox"><code class="xref py py-meth docutils literal"><span class="pre">scrollbox()</span></code></a>.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=10,</span> <span class="pre">width=30</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id1">
+<img alt="_images/msgbox.png" src="_images/msgbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.msgbox" title="dialog.Dialog.msgbox"><code class="xref py py-meth docutils literal"><span class="pre">msgbox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="text-box">
+<h3>Text box<a class="headerlink" href="#text-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.textbox">
+<code class="descclassname">Dialog.</code><code class="descname">textbox</code><span class="sig-paren">(</span><em>filepath</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.textbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.textbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the contents of a file in a dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; path to a file, the contents of which is to
+be displayed in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">textbox()</span></code> lets you display the contents of a text file
+in a dialog box. It is like a simple text file viewer. The user
+can move through the file using the <code class="kbd docutils literal"><span class="pre">Up</span></code> and <code class="kbd docutils literal"><span class="pre">Down</span></code>
+arrow keys, <code class="kbd docutils literal"><span class="pre">Page</span> <span class="pre">Up</span></code> and <code class="kbd docutils literal"><span class="pre">Page</span> <span class="pre">Down</span></code> as well as the
+<code class="kbd docutils literal"><span class="pre">Home</span></code> and <code class="kbd docutils literal"><span class="pre">End</span></code> keys available on most keyboards. If
+the lines are too long to be displayed in the box, the
+<code class="kbd docutils literal"><span class="pre">Left</span></code> and <code class="kbd docutils literal"><span class="pre">Right</span></code> arrow keys can be used to scroll
+the text region horizontally. For more convenience, forward and
+backward search functions are also provided.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=20,</span> <span class="pre">width=60</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id2">
+<img alt="_images/textbox.png" src="_images/textbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.textbox" title="dialog.Dialog.textbox"><code class="xref py py-meth docutils literal"><span class="pre">textbox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="scroll-box">
+<h3>Scroll box<a class="headerlink" href="#scroll-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.scrollbox">
+<code class="descclassname">Dialog.</code><code class="descname">scrollbox</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.scrollbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.scrollbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a string in a scrollable box, with no line wrapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; string to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method is a layer on top of <a class="reference internal" href="#dialog.Dialog.textbox" title="dialog.Dialog.textbox"><code class="xref py py-meth docutils literal"><span class="pre">textbox()</span></code></a>. The
+<code class="xref py py-meth docutils literal"><span class="pre">textbox()</span></code> widget in <strong class="program">dialog</strong> allows one to
+display file contents only. This method can be used to display
+any text in a scrollable box. This is simply done by creating a
+temporary file, calling <code class="xref py py-meth docutils literal"><span class="pre">textbox()</span></code> and deleting the
+temporary file afterwards.</p>
+<p>The text is not automatically wrapped. New lines in the
+scrollable box will be placed exactly as in <em>text</em>. If you want
+automatic line wrapping, you should use the <a class="reference internal" href="#dialog.Dialog.msgbox" title="dialog.Dialog.msgbox"><code class="xref py py-meth docutils literal"><span class="pre">msgbox()</span></code></a>
+widget instead (the <a class="reference external" href="http://docs.python.org/3/library/textwrap.html#module-textwrap" title="(in Python v3.5)"><code class="xref py py-mod docutils literal"><span class="pre">textwrap</span></code></a> module from the Python
+standard library is also worth knowing about).</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=20,</span> <span class="pre">width=78</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><a class="reference internal" href="exceptions.html#dialog.PythonDialogOSError" title="dialog.PythonDialogOSError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogOSError</span></code></a> (<a class="reference internal" href="exceptions.html#dialog.PythonDialogIOError" title="dialog.PythonDialogIOError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogIOError</span></code></a> if the
+Python version is &lt; 3.3)</div></blockquote>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.1: </span><code class="xref py py-exc docutils literal"><span class="pre">UnableToCreateTemporaryDirectory</span></code> exception can&#8217;t be
+raised anymore. The equivalent condition now raises
+<a class="reference internal" href="exceptions.html#dialog.PythonDialogOSError" title="dialog.PythonDialogOSError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogOSError</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<div class="figure align-center" id="id3">
+<img alt="_images/scrollbox.png" src="_images/scrollbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.scrollbox" title="dialog.Dialog.scrollbox"><code class="xref py py-meth docutils literal"><span class="pre">scrollbox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="edit-box">
+<h3>Edit box<a class="headerlink" href="#edit-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.editbox">
+<code class="descclassname">Dialog.</code><code class="descname">editbox</code><span class="sig-paren">(</span><em>filepath</em>, <em>height=0</em>, <em>width=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.editbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.editbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a basic text editor dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; path to a file which determines the initial
+contents of the dialog box</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">text</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>text</em> is the contents of the text entry window on exit.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code> dialog displays a copy of the file
+contents. You may edit it using the <code class="kbd docutils literal"><span class="pre">Backspace</span></code>,
+<code class="kbd docutils literal"><span class="pre">Delete</span></code> and cursor keys to correct typing errors. It also
+recognizes <code class="kbd docutils literal"><span class="pre">Page</span> <span class="pre">Up</span></code> and <code class="kbd docutils literal"><span class="pre">Page</span> <span class="pre">Down</span></code>. Unlike the
+<a class="reference internal" href="#dialog.Dialog.inputbox" title="dialog.Dialog.inputbox"><code class="xref py py-meth docutils literal"><span class="pre">inputbox()</span></code></a>, you must tab to the <span class="guilabel">OK</span> or
+<span class="guilabel">Cancel</span> buttons to close the dialog. Pressing the
+<code class="kbd docutils literal"><span class="pre">Enter</span></code> key within the box will split the corresponding
+line.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">method <a class="reference internal" href="#dialog.Dialog.editbox_str" title="dialog.Dialog.editbox_str"><code class="xref py py-meth docutils literal"><span class="pre">editbox_str()</span></code></a></p>
+</div>
+</dd></dl>
+
+<div class="figure align-center" id="id4">
+<img alt="_images/editbox.png" src="_images/editbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.editbox" title="dialog.Dialog.editbox"><code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code></a> example</span></p>
+</div>
+<dl class="method">
+<dt id="dialog.Dialog.editbox_str">
+<code class="descclassname">Dialog.</code><code class="descname">editbox_str</code><span class="sig-paren">(</span><em>init_contents</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.editbox_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.editbox_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a basic text editor dialog box (wrapper around <a class="reference internal" href="#dialog.Dialog.editbox" title="dialog.Dialog.editbox"><code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code></a>).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>init_contents</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; initial contents of the dialog box</li>
+<li><strong>args</strong> &#8211; positional arguments to pass to <a class="reference internal" href="#dialog.Dialog.editbox" title="dialog.Dialog.editbox"><code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code></a></li>
+<li><strong>kwargs</strong> &#8211; keyword arguments to pass to <a class="reference internal" href="#dialog.Dialog.editbox" title="dialog.Dialog.editbox"><code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">text</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>text</em> is the contents of the text entry window on exit.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="xref py py-meth docutils literal"><span class="pre">editbox_str()</span></code> method is a thin wrapper around
+<a class="reference internal" href="#dialog.Dialog.editbox" title="dialog.Dialog.editbox"><code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code></a>. <code class="xref py py-meth docutils literal"><span class="pre">editbox_str()</span></code> accepts a string as its
+first argument, instead of a file path. That string is written
+to a temporary file whose path is passed to <code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code>
+along with the arguments specified via <em>args</em> and <em>kwargs</em>.
+Please refer to <code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code>&#8216;s documentation for more
+details.</p>
+<p>Notes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the temporary file is deleted before the method returns;</li>
+<li>if <em>init_contents</em> does not end with a newline character
+(<code class="docutils literal"><span class="pre">'\n'</span></code>), then this method automatically adds one. This
+is done in order to avoid unexpected behavior resulting from
+the fact that, before version 1.3-20160209,
+<strong class="program">dialog</strong>&#8216;s editbox widget ignored the last line of
+the input file unless it was terminated by a newline
+character.</li>
+</ul>
+</div></blockquote>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="exceptions.html#dialog.PythonDialogOSError" title="dialog.PythonDialogOSError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogOSError</span></code></a></li>
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></li>
+</ul>
+</div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.4.</span></p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">method <a class="reference internal" href="#dialog.Dialog.editbox" title="dialog.Dialog.editbox"><code class="xref py py-meth docutils literal"><span class="pre">editbox()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="progress-box">
+<h3>Progress box<a class="headerlink" href="#progress-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.progressbox">
+<code class="descclassname">Dialog.</code><code class="descname">progressbox</code><span class="sig-paren">(</span><em>file_path=None</em>, <em>file_flags=0</em>, <em>fd=None</em>, <em>text=None</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.progressbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.progressbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a possibly growing stream in a dialog box, as with <code class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></code>.</p>
+<p>A file, or more generally a stream that can be read from, must
+be specified with either:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>file_path</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; path to the file that is going to be displayed</li>
+<li><strong>file_flags</strong> &#8211; flags used when opening <em>file_path</em>; those are passed to
+<a class="reference external" href="http://docs.python.org/3/library/os.html#os.open" title="(in Python v3.5)"><code class="xref py py-func docutils literal"><span class="pre">os.open()</span></code></a> (not the built-in <a class="reference external" href="http://docs.python.org/3/library/functions.html#open" title="(in Python v3.5)"><code class="xref py py-func docutils literal"><span class="pre">open()</span></code></a> function!). By
+default, only one flag is set: <a class="reference external" href="http://docs.python.org/3/library/os.html#os.O_RDONLY" title="(in Python v3.5)"><code class="xref py py-data docutils literal"><span class="pre">os.O_RDONLY</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fd</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; file descriptor for the stream to be displayed</td>
+</tr>
+</tbody>
+</table>
+<p>Remaining parameters:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> &#8211; caption continuously displayed at the top, above
+the stream text, or <code class="docutils literal"><span class="pre">None</span></code> to disable the
+caption</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Display the contents of the specified file, updating the dialog
+box whenever the file grows, as with the <code class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></code> command.</p>
+<p>The file can be specified in two ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li>either by giving its path (and optionally <a class="reference external" href="http://docs.python.org/3/library/os.html#os.open" title="(in Python v3.5)"><code class="xref py py-func docutils literal"><span class="pre">os.open()</span></code></a>
+flags) with parameters <em>file_path</em> and <em>file_flags</em>;</li>
+<li>or by passing its file descriptor with parameter <em>fd</em> (in
+which case it may not even be a file; for instance, it could
+be an anonymous pipe created with <a class="reference external" href="http://docs.python.org/3/library/os.html#os.pipe" title="(in Python v3.5)"><code class="xref py py-func docutils literal"><span class="pre">os.pipe()</span></code></a>).</li>
+</ul>
+</div></blockquote>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=20,</span> <span class="pre">width=78</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="exceptions.html#dialog.PythonDialogOSError" title="dialog.PythonDialogOSError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogOSError</span></code></a> (<a class="reference internal" href="exceptions.html#dialog.PythonDialogIOError" title="dialog.PythonDialogIOError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogIOError</span></code></a> if
+the Python version is &lt; 3.3)</li>
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id5">
+<img alt="_images/progressbox.png" src="_images/progressbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.progressbox" title="dialog.Dialog.progressbox"><code class="xref py py-meth docutils literal"><span class="pre">progressbox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="program-box">
+<h3>Program box<a class="headerlink" href="#program-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.programbox">
+<code class="descclassname">Dialog.</code><code class="descname">programbox</code><span class="sig-paren">(</span><em>file_path=None</em>, <em>file_flags=0</em>, <em>fd=None</em>, <em>text=None</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.programbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.programbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a possibly growing stream in a dialog box, as with <code class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></code>.</p>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">programbox()</span></code> is very similar to a <a class="reference internal" href="#dialog.Dialog.progressbox" title="dialog.Dialog.progressbox"><code class="xref py py-meth docutils literal"><span class="pre">progressbox()</span></code></a>.
+The only difference between a <code class="xref py py-meth docutils literal"><span class="pre">programbox()</span></code> and a
+<code class="xref py py-meth docutils literal"><span class="pre">progressbox()</span></code> is that a <code class="xref py py-meth docutils literal"><span class="pre">programbox()</span></code> displays an
+<span class="guilabel">OK</span> button, but only after the input stream has been
+exhausted (i.e., <em>End Of File</em> has been reached).</p>
+<p>This dialog box can be used to display the piped output of an
+external program. After the program completes, the user can
+press the <code class="kbd docutils literal"><span class="pre">Enter</span></code> key to close the dialog and resume
+execution of the calling program.</p>
+<p>The parameters and exceptions are the same as for
+<a class="reference internal" href="#dialog.Dialog.progressbox" title="dialog.Dialog.progressbox"><code class="xref py py-meth docutils literal"><span class="pre">progressbox()</span></code></a>. Please refer to the corresponding
+documentation.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=20,</span> <span class="pre">width=78</span></code>.</p>
+<p>This widget requires <strong class="program">dialog</strong> &gt;= 1.1-20110302.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.14.</span></p>
+</div>
+</dd></dl>
+
+<div class="figure align-center" id="id6">
+<img alt="_images/programbox.png" src="_images/programbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.programbox" title="dialog.Dialog.programbox"><code class="xref py py-meth docutils literal"><span class="pre">programbox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="tail-box">
+<h3>Tail box<a class="headerlink" href="#tail-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.tailbox">
+<code class="descclassname">Dialog.</code><code class="descname">tailbox</code><span class="sig-paren">(</span><em>filepath</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.tailbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.tailbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the contents of a file in a dialog box, as with <code class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; path to a file, the contents of which is to
+be displayed in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Display the contents of the file specified with <em>filepath</em>,
+updating the dialog box whenever the file grows, as with the
+<code class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></code> command.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=20,</span> <span class="pre">width=60</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id7">
+<img alt="_images/tailbox.png" src="_images/tailbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.tailbox" title="dialog.Dialog.tailbox"><code class="xref py py-meth docutils literal"><span class="pre">tailbox()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="displaying-transient-messages">
+<h2>Displaying transient messages<a class="headerlink" href="#displaying-transient-messages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="info-box">
+<h3>Info box<a class="headerlink" href="#info-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.infobox">
+<code class="descclassname">Dialog.</code><code class="descname">infobox</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.infobox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.infobox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display an information dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>An info box is basically a message box. However, in this case,
+<strong class="program">dialog</strong> will exit immediately after displaying the
+message to the user. The screen is not cleared when
+<strong class="program">dialog</strong> exits, so that the message will remain on the
+screen after the method returns. This is useful when you want to
+inform the user that some operations are carrying on that may
+require some time to finish.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=10,</span> <span class="pre">width=30</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id8">
+<img alt="_images/infobox.png" src="_images/infobox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.infobox" title="dialog.Dialog.infobox"><code class="xref py py-meth docutils literal"><span class="pre">infobox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="pause">
+<h3>Pause<a class="headerlink" href="#pause" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.pause">
+<code class="descclassname">Dialog.</code><code class="descname">pause</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>seconds=5</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.pause"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.pause" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a pause dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>seconds</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; number of seconds to pause for</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a> (which is <a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog.OK" title="dialog.Dialog.OK"><code class="xref py py-attr docutils literal"><span class="pre">Dialog.OK</span></code></a> if the
+widget ended automatically after <em>seconds</em> seconds or if the
+user pressed the <span class="guilabel">OK</span> button)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">pause()</span></code> box displays a text and a meter along the
+bottom of the box, during a specified amount of time
+(<em>seconds</em>). The meter indicates how many seconds remain until
+the end of the pause. The widget exits when the specified number
+of seconds is elapsed, or immediately if the user presses the
+<span class="guilabel">OK</span> button, the <span class="guilabel">Cancel</span> button or the
+<code class="kbd docutils literal"><span class="pre">Esc</span></code> key.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=15,</span> <span class="pre">width=60</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id9">
+<img alt="_images/pause.png" src="_images/pause.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.pause" title="dialog.Dialog.pause"><code class="xref py py-meth docutils literal"><span class="pre">pause()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="progress-meters">
+<h2>Progress meters<a class="headerlink" href="#progress-meters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="regular-gauge">
+<span id="gauge-widget"></span><h3>Regular gauge<a class="headerlink" href="#regular-gauge" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.gauge_start">
+<code class="descclassname">Dialog.</code><code class="descname">gauge_start</code><span class="sig-paren">(</span><em>text=''</em>, <em>height=None</em>, <em>width=None</em>, <em>percent=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.gauge_start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.gauge_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a gauge box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>percent</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; initial percentage shown in the meter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">undefined</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A gauge box displays a meter along the bottom of the box. The
+meter indicates a percentage.</p>
+<p>This function starts the <strong class="program">dialog</strong>-like program, telling
+it to display a gauge box containing a text and an initial
+percentage in the meter.</p>
+<p class="rubric">Gauge typical usage</p>
+<p>Gauge typical usage (assuming that <em>d</em> is an instance of the
+<a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog" title="dialog.Dialog"><code class="xref py py-class docutils literal"><span class="pre">Dialog</span></code></a> class) looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">gauge_start</span><span class="p">()</span>
+<span class="c1"># do something</span>
+<span class="n">d</span><span class="o">.</span><span class="n">gauge_update</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>       <span class="c1"># 10% of the whole task is done</span>
+<span class="c1"># ...</span>
+<span class="n">d</span><span class="o">.</span><span class="n">gauge_update</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;any text here&quot;</span><span class="p">)</span> <span class="c1"># work is done</span>
+<span class="n">exit_code</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">gauge_stop</span><span class="p">()</span>           <span class="c1"># cleanup actions</span>
+</pre></div>
+</div>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=8,</span> <span class="pre">width=54</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._call_program" title="dialog.Dialog._call_program"><code class="xref py py-meth docutils literal"><span class="pre">_call_program()</span></code></a></li>
+<li><a class="reference internal" href="exceptions.html#dialog.PythonDialogOSError" title="dialog.PythonDialogOSError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogOSError</span></code></a></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="dialog.Dialog.gauge_update">
+<code class="descclassname">Dialog.</code><code class="descname">gauge_update</code><span class="sig-paren">(</span><em>percent</em>, <em>text=''</em>, <em>update_text=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.gauge_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.gauge_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a running gauge box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>percent</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; new percentage to show in the gauge
+meter</li>
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; new text to optionally display in the
+box</li>
+<li><strong>update_text</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) &#8211; whether to update the text in the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">undefined</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function updates the percentage shown by the meter of a
+running gauge box (meaning <a class="reference internal" href="#dialog.Dialog.gauge_start" title="dialog.Dialog.gauge_start"><code class="xref py py-meth docutils literal"><span class="pre">gauge_start()</span></code></a> must have been
+called previously). If <em>update_text</em> is <code class="docutils literal"><span class="pre">True</span></code>, the text
+displayed in the box is also updated.</p>
+<p>See the <a class="reference internal" href="#dialog.Dialog.gauge_start" title="dialog.Dialog.gauge_start"><code class="xref py py-meth docutils literal"><span class="pre">gauge_start()</span></code></a> method documentation for information
+about how to use a gauge.</p>
+<p>Notable exception:</p>
+<blockquote>
+<div><a class="reference internal" href="exceptions.html#dialog.PythonDialogIOError" title="dialog.PythonDialogIOError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogIOError</span></code></a> (<a class="reference internal" href="exceptions.html#dialog.PythonDialogOSError" title="dialog.PythonDialogOSError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogOSError</span></code></a> from
+Python 3.3 onwards) can be raised if there is an I/O error
+while trying to write to the pipe used to talk to the
+<strong class="program">dialog</strong>-like program.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="dialog.Dialog.gauge_iterate">
+<code class="descclassname">Dialog.</code><code class="descname">gauge_iterate</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.gauge_iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.gauge_iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a running gauge box.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 2.03: </span>Use <a class="reference internal" href="#dialog.Dialog.gauge_update" title="dialog.Dialog.gauge_update"><code class="xref py py-meth docutils literal"><span class="pre">gauge_update()</span></code></a> instead.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="dialog.Dialog.gauge_stop">
+<code class="descclassname">Dialog.</code><code class="descname">gauge_stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.gauge_stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.gauge_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate a running gauge widget.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></td>
+</tr>
+</tbody>
+</table>
+<p>This function performs the appropriate cleanup actions to
+terminate a running gauge started with <a class="reference internal" href="#dialog.Dialog.gauge_start" title="dialog.Dialog.gauge_start"><code class="xref py py-meth docutils literal"><span class="pre">gauge_start()</span></code></a>.</p>
+<p>See the <code class="xref py py-meth docutils literal"><span class="pre">gauge_start()</span></code> method documentation for
+information about how to use a gauge.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>any exception raised by <code class="xref py py-meth docutils literal"><span class="pre">_handle_program_exit()</span></code>;</li>
+<li><a class="reference internal" href="exceptions.html#dialog.PythonDialogIOError" title="dialog.PythonDialogIOError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogIOError</span></code></a> (<a class="reference internal" href="exceptions.html#dialog.PythonDialogOSError" title="dialog.PythonDialogOSError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogOSError</span></code></a> from
+Python 3.3 onwards) can be raised if closing the pipe used
+to talk to the <strong class="program">dialog</strong>-like program fails.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id10">
+<img alt="_images/gauge.png" src="_images/gauge.png" />
+<p class="caption"><span class="caption-text"><code class="xref py py-meth docutils literal"><span class="pre">gauge()</span></code> example</span></p>
+</div>
+</div>
+<div class="section" id="mixed-gauge">
+<h3>Mixed gauge<a class="headerlink" href="#mixed-gauge" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.mixedgauge">
+<code class="descclassname">Dialog.</code><code class="descname">mixedgauge</code><span class="sig-paren">(</span><em>text</em>, <em>height=0</em>, <em>width=0</em>, <em>percent=0</em>, <em>elements=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.mixedgauge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.mixedgauge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a mixed gauge dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the middle of the box,
+between the elements list and the progress
+bar</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+<li><strong>percent</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; integer giving the percentage for the global
+progress bar</li>
+<li><strong>elements</strong> &#8211; an iterable of <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">tag</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">)</span></code>
+tuples, the meaning of which is explained
+below</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">mixedgauge()</span></code> box displays a list of &#8220;elements&#8221; with
+status indication for each of them, followed by a text and
+finally a global progress bar along the bottom of the box.</p>
+<p>The top part (&#8220;elements&#8221;) is suitable for displaying a task
+list. One element is displayed per line, with its <em>tag</em> part on
+the left and its <em>item</em> part on the right. The <em>item</em> part is a
+string that is displayed on the right of the same line.</p>
+<p>The <em>item</em> part of an element can be an arbitrary string.
+Special values listed in the <em class="manpage">dialog(3)</em> manual page
+are translated into a status indication for the corresponding
+task (<em>tag</em>), such as: &#8220;Succeeded&#8221;, &#8220;Failed&#8221;, &#8220;Passed&#8221;,
+&#8220;Completed&#8221;, &#8220;Done&#8221;, &#8220;Skipped&#8221;, &#8220;In Progress&#8221;, &#8220;Checked&#8221;, &#8220;N/A&#8221;
+or a progress bar.</p>
+<p>A progress bar for an element is obtained by supplying a
+negative number for the <em>item</em>. For instance, <code class="docutils literal"><span class="pre">&quot;-75&quot;</span></code> will
+cause a progress bar indicating 75% to be displayed on the
+corresponding line.</p>
+<p>For your convenience, if an <em>item</em> appears to be an integer or a
+float, it will be converted to a string before being passed to
+the <strong class="program">dialog</strong>-like program.</p>
+<p><em>text</em> is shown as a sort of caption between the list and the
+global progress bar. The latter displays <em>percent</em> as the
+percentage of completion.</p>
+<p>Contrary to the regular <a class="reference internal" href="#gauge-widget"><span class="std std-ref">gauge widget</span></a>,
+<code class="xref py py-meth docutils literal"><span class="pre">mixedgauge()</span></code> is completely static. You have to call
+<code class="xref py py-meth docutils literal"><span class="pre">mixedgauge()</span></code> several times in order to display different
+percentages in the global progress bar or various status
+indicators for a given task.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Calling <code class="xref py py-meth docutils literal"><span class="pre">mixedgauge()</span></code> several times is likely to cause
+unwanted flickering because of the screen initializations
+performed by <strong class="program">dialog</strong> on every run.</p>
+</div>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id11">
+<img alt="_images/mixedgauge.png" src="_images/mixedgauge.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.mixedgauge" title="dialog.Dialog.mixedgauge"><code class="xref py py-meth docutils literal"><span class="pre">mixedgauge()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="list-like-widgets">
+<h2>List-like widgets<a class="headerlink" href="#list-like-widgets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-list">
+<h3>Build list<a class="headerlink" href="#build-list" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.buildlist">
+<code class="descclassname">Dialog.</code><code class="descname">buildlist</code><span class="sig-paren">(</span><em>text</em>, <em>height=0</em>, <em>width=0</em>, <em>list_height=0</em>, <em>items=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.buildlist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.buildlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a buildlist box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+<li><strong>list_height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the selected and unselected
+list boxes</li>
+<li><strong>items</strong> &#8211; an iterable of <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">tag</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">,</span> <em><span class="pre">status</span></em><span class="pre">)</span></code> tuples where
+<em>status</em> specifies the initial selected/unselected state of
+each entry; can be <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>, <code class="docutils literal"><span class="pre">1</span></code> or <code class="docutils literal"><span class="pre">0</span></code>,
+<code class="docutils literal"><span class="pre">&quot;on&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;off&quot;</span></code> (<code class="docutils literal"><span class="pre">True</span></code>, <code class="docutils literal"><span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">&quot;on&quot;</span></code> meaning
+selected), or any case variation of these two strings.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">tags</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>tags</em> is a list of the tags corresponding to the selected
+items, in the order they have in the list on the right.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">buildlist()</span></code> dialog is similar in logic to the
+<a class="reference internal" href="#dialog.Dialog.checklist" title="dialog.Dialog.checklist"><code class="xref py py-meth docutils literal"><span class="pre">checklist()</span></code></a>, but differs in presentation. In this widget,
+two lists are displayed, side by side. The list on the left
+shows unselected items. The list on the right shows selected
+items. As items are selected or unselected, they move between
+the two lists. The <em>status</em> component of <em>items</em> specifies which
+items are initially selected.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="kbd docutils literal"><span class="pre">Space</span></code></td>
+<td>select or deselect the highlighted item,
+<em>i.e.</em>, move it between the left and right
+lists</td>
+</tr>
+<tr class="row-odd"><td><code class="kbd docutils literal"><span class="pre">^</span></code></td>
+<td>move the focus to the left list</td>
+</tr>
+<tr class="row-even"><td><code class="kbd docutils literal"><span class="pre">$</span></code></td>
+<td>move the focus to the right list</td>
+</tr>
+<tr class="row-odd"><td><code class="kbd docutils literal"><span class="pre">Tab</span></code></td>
+<td>move focus (see <em>visit_items</em> below)</td>
+</tr>
+<tr class="row-even"><td><code class="kbd docutils literal"><span class="pre">Enter</span></code></td>
+<td>press the focused button</td>
+</tr>
+</tbody>
+</table>
+<p>If called with <code class="docutils literal"><span class="pre">visit_items=True</span></code>, the <code class="kbd docutils literal"><span class="pre">Tab</span></code> key can move
+the focus to the left and right lists, which is probably more
+intuitive for users than the default behavior that requires
+using <code class="kbd docutils literal"><span class="pre">^</span></code> and <code class="kbd docutils literal"><span class="pre">$</span></code> for this purpose.</p>
+<p>This widget requires dialog &gt;= 1.2-20121230.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a> or <a class="reference internal" href="internals.html#dialog._to_onoff" title="dialog._to_onoff"><code class="xref py py-func docutils literal"><span class="pre">_to_onoff()</span></code></a></div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.0.</span></p>
+</div>
+</dd></dl>
+
+<div class="figure align-center" id="id12">
+<img alt="_images/buildlist.png" src="_images/buildlist.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.buildlist" title="dialog.Dialog.buildlist"><code class="xref py py-meth docutils literal"><span class="pre">buildlist()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="check-list">
+<h3>Check list<a class="headerlink" href="#check-list" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.checklist">
+<code class="descclassname">Dialog.</code><code class="descname">checklist</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>list_height=None</em>, <em>choices=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.checklist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.checklist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a checklist box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>list_height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; number of entries displayed in the box at a given time (the
+contents can be scrolled)</li>
+<li><strong>choices</strong> &#8211; an iterable of <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">tag</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">,</span> <em><span class="pre">status</span></em><span class="pre">)</span></code> tuples where
+<em>status</em> specifies the initial selected/unselected state of
+each entry; can be <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>, <code class="docutils literal"><span class="pre">1</span></code> or <code class="docutils literal"><span class="pre">0</span></code>,
+<code class="docutils literal"><span class="pre">&quot;on&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;off&quot;</span></code> (<code class="docutils literal"><span class="pre">True</span></code>, <code class="docutils literal"><span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">&quot;on&quot;</span></code> meaning
+selected), or any case variation of these two strings.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <span class="pre">[</span><em><span class="pre">tag</span></em><span class="pre">,</span> <span class="pre">...])</span></code>
+whose first element is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a> and second
+element lists all tags for the entries selected by the user.
+If the user exits with <code class="kbd docutils literal"><span class="pre">Esc</span></code> or <span class="guilabel">Cancel</span>, the
+returned tag list is empty.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=15,</span> <span class="pre">width=54,</span> <span class="pre">list_height=7</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a> or <a class="reference internal" href="internals.html#dialog._to_onoff" title="dialog._to_onoff"><code class="xref py py-func docutils literal"><span class="pre">_to_onoff()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id13">
+<img alt="_images/checklist.png" src="_images/checklist.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.checklist" title="dialog.Dialog.checklist"><code class="xref py py-meth docutils literal"><span class="pre">checklist()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="menu">
+<h3>Menu<a class="headerlink" href="#menu" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.menu">
+<code class="descclassname">Dialog.</code><code class="descname">menu</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>menu_height=None</em>, <em>choices=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.menu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a menu dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>menu_height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; number of entries displayed in the box
+(which can be scrolled) at a given time</li>
+<li><strong>choices</strong> &#8211; an iterable of <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">tag</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">)</span></code>
+tuples, the meaning of which is explained
+below</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">tag</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>tag</em> is the tag string corresponding to the item that the
+user chose.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>As its name suggests, a <code class="xref py py-meth docutils literal"><span class="pre">menu()</span></code> box is a dialog box that
+can be used to present a list of choices in the form of a menu
+for the user to choose. Choices are displayed in the given
+order.</p>
+<p>Each menu entry consists of a <em>tag</em> string and an <em>item</em> string.
+The <em class="dfn">tag</em> gives the entry a name to distinguish it from the
+other entries in the menu and to provide quick keyboard access.
+The <em class="dfn">item</em> is a short description of the option that the
+entry represents.</p>
+<p>The user can move between the menu entries by pressing the
+<code class="kbd docutils literal"><span class="pre">Up</span></code> and <code class="kbd docutils literal"><span class="pre">Down</span></code> arrow keys, the first letter of the
+tag as a hotkey, or the number keys <code class="kbd docutils literal"><span class="pre">1</span></code> through <code class="kbd docutils literal"><span class="pre">9</span></code>.
+There are <em>menu_height</em> entries displayed in the menu at one
+time, but it will be scrolled if there are more entries than
+that.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=15,</span> <span class="pre">width=54,</span> <span class="pre">menu_height=7</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id14">
+<img alt="_images/menu.png" src="_images/menu.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.menu" title="dialog.Dialog.menu"><code class="xref py py-meth docutils literal"><span class="pre">menu()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="radio-list">
+<h3>Radio list<a class="headerlink" href="#radio-list" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.radiolist">
+<code class="descclassname">Dialog.</code><code class="descname">radiolist</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>list_height=None</em>, <em>choices=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.radiolist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.radiolist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a radiolist box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>list_height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; number of entries displayed in the box
+(which can be scrolled) at a given time</li>
+<li><strong>choices</strong> &#8211; an iterable of <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">tag</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">,</span> <em><span class="pre">status</span></em><span class="pre">)</span></code> tuples
+where <em>status</em> specifies the initial selected/unselected
+state of each entry; can be <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>, <code class="docutils literal"><span class="pre">1</span></code> or
+<code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">&quot;on&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;off&quot;</span></code> (<code class="docutils literal"><span class="pre">True</span></code>, <code class="docutils literal"><span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">&quot;on&quot;</span></code>
+meaning selected), or any case variation of these two
+strings. No more than one entry should be set to <code class="docutils literal"><span class="pre">True</span></code>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">tag</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>tag</em> is the tag string corresponding to the entry that was
+chosen by the user.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">radiolist()</span></code> box is similar to a <a class="reference internal" href="#dialog.Dialog.menu" title="dialog.Dialog.menu"><code class="xref py py-meth docutils literal"><span class="pre">menu()</span></code></a> box. The
+main differences are presentation and that the
+<code class="xref py py-meth docutils literal"><span class="pre">radiolist()</span></code> allows you to indicate which entry is
+initially selected, by setting its status to <code class="docutils literal"><span class="pre">True</span></code>.</p>
+<p>If the user exits with <code class="kbd docutils literal"><span class="pre">Esc</span></code> or <span class="guilabel">Cancel</span>, or if
+all entries were initially set to <code class="docutils literal"><span class="pre">False</span></code> and not altered
+before the user chose <span class="guilabel">OK</span>, the returned tag is the
+empty string.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=15,</span> <span class="pre">width=54,</span> <span class="pre">list_height=7</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a> or <a class="reference internal" href="internals.html#dialog._to_onoff" title="dialog._to_onoff"><code class="xref py py-func docutils literal"><span class="pre">_to_onoff()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id15">
+<img alt="_images/radiolist.png" src="_images/radiolist.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.radiolist" title="dialog.Dialog.radiolist"><code class="xref py py-meth docutils literal"><span class="pre">radiolist()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="tree-view">
+<h3>Tree view<a class="headerlink" href="#tree-view" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.treeview">
+<code class="descclassname">Dialog.</code><code class="descname">treeview</code><span class="sig-paren">(</span><em>text</em>, <em>height=0</em>, <em>width=0</em>, <em>list_height=0</em>, <em>nodes=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.treeview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.treeview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a treeview box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display at the top of the box</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+<li><strong>list_height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; number of lines reserved for the main part of the box,
+where the tree is displayed</li>
+<li><strong>nodes</strong> &#8211; <p>an iterable of <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">tag</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">,</span> <em><span class="pre">status</span></em><span class="pre">,</span> <em><span class="pre">depth</span></em><span class="pre">)</span></code> tuples
+describing nodes, where:</p>
+<blockquote>
+<div><ul>
+<li><em>tag</em> is used to indicate which node was selected by
+the user on exit;</li>
+<li><em>item</em> is the text displayed for the node;</li>
+<li><em>status</em> specifies the initial selected/unselected
+state of each entry; can be <code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>,
+<code class="docutils literal"><span class="pre">1</span></code> or <code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">&quot;on&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;off&quot;</span></code> (<code class="docutils literal"><span class="pre">True</span></code>, <code class="docutils literal"><span class="pre">1</span></code>
+and <code class="docutils literal"><span class="pre">&quot;on&quot;</span></code> meaning selected), or any case variation
+of these two strings;</li>
+<li><em>depth</em> is a non-negative integer indicating the depth
+of the node in the tree (<code class="docutils literal"><span class="pre">0</span></code> for the root node).</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">tag</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>tag</em> is the tag of the selected node.</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Display nodes organized in a tree structure. Each node has a
+<em>tag</em>, an <em>item</em> text, a selected <em>status</em>, and a <em>depth</em> in
+the tree. Only the <em>item</em> texts are displayed in the widget;
+<em>tag</em>s are only used for the return value. Only one node can
+be selected at a given time, as for the <a class="reference internal" href="#dialog.Dialog.radiolist" title="dialog.Dialog.radiolist"><code class="xref py py-meth docutils literal"><span class="pre">radiolist()</span></code></a>
+widget.</p>
+<p>This widget requires <strong class="program">dialog</strong> &gt;= 1.2-20121230.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a> or <a class="reference internal" href="internals.html#dialog._to_onoff" title="dialog._to_onoff"><code class="xref py py-func docutils literal"><span class="pre">_to_onoff()</span></code></a></div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.14.</span></p>
+</div>
+</dd></dl>
+
+<div class="figure align-center" id="id16">
+<img alt="_images/treeview.png" src="_images/treeview.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.treeview" title="dialog.Dialog.treeview"><code class="xref py py-meth docutils literal"><span class="pre">treeview()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="single-line-input-fields">
+<h2>Single-line input fields<a class="headerlink" href="#single-line-input-fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="input-box">
+<h3>Input box<a class="headerlink" href="#input-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.inputbox">
+<code class="descclassname">Dialog.</code><code class="descname">inputbox</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>init=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.inputbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.inputbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display an input dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>init</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; default input string</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">string</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>string</em> is the string entered by the user.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>An input box is useful when you want to ask questions that
+require the user to input a string as the answer. If <em>init</em> is
+supplied, it is used to initialize the input string. When
+entering the string, the <code class="kbd docutils literal"><span class="pre">Backspace</span></code> key can be used to
+correct typing errors. If the input string is longer than can
+fit in the dialog box, the input field will be scrolled.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=10,</span> <span class="pre">width=30</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id17">
+<img alt="_images/inputbox.png" src="_images/inputbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.inputbox" title="dialog.Dialog.inputbox"><code class="xref py py-meth docutils literal"><span class="pre">inputbox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="input-menu">
+<h3>Input menu<a class="headerlink" href="#input-menu" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.inputmenu">
+<code class="descclassname">Dialog.</code><code class="descname">inputmenu</code><span class="sig-paren">(</span><em>text</em>, <em>height=0</em>, <em>width=None</em>, <em>menu_height=None</em>, <em>choices=[]</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.inputmenu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.inputmenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display an inputmenu dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>menu_height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the menu (scrollable part)</li>
+<li><strong>choices</strong> &#8211; an iterable of <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">tag</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">)</span></code>
+tuples, the meaning of which is explained
+below</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">see <a class="reference internal" href="#inputmenu-return-value"><span class="std std-ref">below</span></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Overview</p>
+<p>An <code class="xref py py-meth docutils literal"><span class="pre">inputmenu()</span></code> box is a dialog box that can be used to
+present a list of choices in the form of a menu for the user to
+choose. Choices are displayed in the given order. The main
+differences with the <a class="reference internal" href="#dialog.Dialog.menu" title="dialog.Dialog.menu"><code class="xref py py-meth docutils literal"><span class="pre">menu()</span></code></a> dialog box are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>entries are not automatically centered, but left-adjusted;</li>
+<li>the current entry can be renamed by pressing the
+<span class="guilabel">Rename</span> button, which allows editing the <em>item</em>
+part of the current entry.</li>
+</ul>
+</div></blockquote>
+<p>Each menu entry consists of a <em>tag</em> string and an <em>item</em> string.
+The <em class="dfn">tag</em> gives the entry a name to distinguish it from the
+other entries in the menu and to provide quick keyboard access.
+The <em class="dfn">item</em> is a short description of the option that the
+entry represents.</p>
+<p>The user can move between the menu entries by pressing the
+<code class="kbd docutils literal"><span class="pre">Up</span></code> and <code class="kbd docutils literal"><span class="pre">Down</span></code> arrow keys or the first letter of the
+tag as a hot key. There are <em>menu_height</em> lines (not entries!)
+displayed in the scrollable part of the menu at one time.</p>
+<p>At the time of this writing (with <strong class="program">dialog</strong>
+1.2-20140219), it is not possible to add an Extra button to this
+widget, because internally, the <span class="guilabel">Rename</span> button <em>is</em>
+the Extra button.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is strongly advised not to put any space in tags, otherwise
+the <strong class="program">dialog</strong> output can be ambiguous if the
+corresponding entry is renamed, causing pythondialog to return
+a wrong tag string and new item text.</p>
+<p class="last">The reason is that in this case, the <strong class="program">dialog</strong> output
+is <code class="samp docutils literal"><span class="pre">RENAMED</span> <em><span class="pre">tag</span></em> <em><span class="pre">item</span></em></code> and pythondialog cannot guess
+whether spaces after the <code class="samp docutils literal"><span class="pre">RENAMED</span></code> + <em>space</em> prefix
+belong to the <em>tag</em> or the new <em>item</em> text.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is no point in calling this method with
+<code class="docutils literal"><span class="pre">help_status=True</span></code>, because it is not possible to rename
+several items nor is it possible to choose the
+<span class="guilabel">Help</span> button (or any button other than
+<span class="guilabel">Rename</span>) once one has started to rename an item.</p>
+</div>
+<p class="rubric" id="inputmenu-return-value">Return value</p>
+<p>Return a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">exit_info</span></em><span class="pre">,</span> <em><span class="pre">tag</span></em><span class="pre">,</span>
+<em><span class="pre">new_item_text</span></em><span class="pre">)</span></code> where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>exit_info</em> is either:<ul>
+<li>the string <code class="docutils literal"><span class="pre">&quot;accepted&quot;</span></code>, meaning that an entry was
+accepted without renaming;</li>
+<li>the string <code class="docutils literal"><span class="pre">&quot;renamed&quot;</span></code>, meaning that an entry was
+accepted after being renamed;</li>
+<li>one of the standard <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit codes</span></a> <a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog.CANCEL" title="dialog.Dialog.CANCEL"><code class="xref py py-attr docutils literal"><span class="pre">Dialog.CANCEL</span></code></a>, <a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog.ESC" title="dialog.Dialog.ESC"><code class="xref py py-attr docutils literal"><span class="pre">Dialog.ESC</span></code></a> or
+<a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog.HELP" title="dialog.Dialog.HELP"><code class="xref py py-attr docutils literal"><span class="pre">Dialog.HELP</span></code></a> (<a class="reference internal" href="Dialog_class_overview.html#dialog.Dialog.EXTRA" title="dialog.Dialog.EXTRA"><code class="xref py py-attr docutils literal"><span class="pre">Dialog.EXTRA</span></code></a> can&#8217;t be
+returned, because internally, the <span class="guilabel">Rename</span>
+button <em>is</em> the Extra button).</li>
+</ul>
+</li>
+<li><em>tag</em> indicates which entry was accepted (with or without
+renaming), if any. If no entry was accepted (e.g., if the
+dialog was exited with the <span class="guilabel">Cancel</span> button), then
+<em>tag</em> is <code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><em>new_item_text</em> gives the new <em>item</em> part of the renamed
+entry if <em>exit_info</em> is <code class="docutils literal"><span class="pre">&quot;renamed&quot;</span></code>, otherwise it is
+<code class="docutils literal"><span class="pre">None</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=0,</span> <span class="pre">width=60,</span> <span class="pre">menu_height=7</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id18">
+<img alt="_images/inputmenu.png" src="_images/inputmenu.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.inputmenu" title="dialog.Dialog.inputmenu"><code class="xref py py-meth docutils literal"><span class="pre">inputmenu()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="password-box">
+<h3>Password box<a class="headerlink" href="#password-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.passwordbox">
+<code class="descclassname">Dialog.</code><code class="descname">passwordbox</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>init=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.passwordbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.passwordbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a password input dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>init</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; default input password</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">password</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>password</em> is the password entered by the user.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">passwordbox()</span></code> is similar to an <a class="reference internal" href="#dialog.Dialog.inputbox" title="dialog.Dialog.inputbox"><code class="xref py py-meth docutils literal"><span class="pre">inputbox()</span></code></a>, except
+that the text the user enters is not displayed. This is useful
+when prompting for passwords or other sensitive information. Be
+aware that if anything is passed in <em>init</em>, it will be visible
+in the system&#8217;s process table to casual snoopers. Also, it is
+very confusing to the user to provide them with a default
+password they cannot see. For these reasons, using <em>init</em> is
+highly discouraged.</p>
+<p>By default (as in <strong class="program">dialog</strong>), nothing is echoed to the
+terminal as the user enters the sensitive text. This can be
+confusing to users. Use <code class="docutils literal"><span class="pre">insecure=True</span></code> (keyword argument) if
+you want an asterisk to be echoed for each character entered by
+the user.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=10,</span> <span class="pre">width=60</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id19">
+<img alt="_images/passwordbox.png" src="_images/passwordbox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.passwordbox" title="dialog.Dialog.passwordbox"><code class="xref py py-meth docutils literal"><span class="pre">passwordbox()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="forms">
+<h2>Forms<a class="headerlink" href="#forms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="form">
+<h3>Form<a class="headerlink" href="#form" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.form">
+<code class="descclassname">Dialog.</code><code class="descname">form</code><span class="sig-paren">(</span><em>text</em>, <em>elements</em>, <em>height=0</em>, <em>width=0</em>, <em>form_height=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.form" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a form consisting of labels and fields.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>elements</strong> &#8211; sequence describing the labels and
+fields (see below)</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+<li><strong>form_height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; number of form lines displayed at the
+same time</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">list</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>list</em> gives the contents of every editable field on exit,
+with the same order as in <em>elements</em>.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">form()</span></code> box consists in a series of <em class="dfn">fields</em> and
+associated <em class="dfn">labels</em>. This type of dialog is suitable for
+adjusting configuration parameters and similar tasks.</p>
+<p>Each element of <em>elements</em> must itself be a sequence
+<code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">label</span></em><span class="pre">,</span> <em><span class="pre">yl</span></em><span class="pre">,</span> <em><span class="pre">xl</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">,</span> <em><span class="pre">yi</span></em><span class="pre">,</span> <em><span class="pre">xi</span></em><span class="pre">,</span> <em><span class="pre">field_length</span></em><span class="pre">,</span>
+<em><span class="pre">input_length</span></em><span class="pre">)</span></code> containing the various parameters concerning a
+given field and the associated label.</p>
+<p><em>label</em> is a string that will be displayed at row <em>yl</em>, column
+<em>xl</em>. <em>item</em> is a string giving the initial value for the field,
+which will be displayed at row <em>yi</em>, column <em>xi</em> (row and column
+numbers starting from 1).</p>
+<p><em>field_length</em> and <em>input_length</em> are integers that respectively
+specify the number of characters used for displaying the field
+and the maximum number of characters that can be entered for
+this field. These two integers also determine whether the
+contents of the field can be modified, as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>if <em>field_length</em> is zero, the field cannot be altered and
+its contents determines the displayed length;</li>
+<li>if <em>field_length</em> is negative, the field cannot be altered
+and the opposite of <em>field_length</em> gives the displayed
+length;</li>
+<li>if <em>input_length</em> is zero, it is set to <em>field_length</em>.</li>
+</ul>
+</div></blockquote>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="exceptions.html#dialog.BadPythonDialogUsage" title="dialog.BadPythonDialogUsage"><code class="xref py py-exc docutils literal"><span class="pre">BadPythonDialogUsage</span></code></a></li>
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id20">
+<img alt="_images/form.png" src="_images/form.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.form" title="dialog.Dialog.form"><code class="xref py py-meth docutils literal"><span class="pre">form()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="mixed-form">
+<h3>Mixed form<a class="headerlink" href="#mixed-form" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.mixedform">
+<code class="descclassname">Dialog.</code><code class="descname">mixedform</code><span class="sig-paren">(</span><em>text</em>, <em>elements</em>, <em>height=0</em>, <em>width=0</em>, <em>form_height=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.mixedform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.mixedform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a form consisting of labels and fields.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>elements</strong> &#8211; sequence describing the labels and
+fields (see below)</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+<li><strong>form_height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; number of form lines displayed at the
+same time</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">list</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>list</em> gives the contents of every field on exit, with the
+same order as in <em>elements</em>.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">mixedform()</span></code> box is very similar to a <a class="reference internal" href="#dialog.Dialog.form" title="dialog.Dialog.form"><code class="xref py py-meth docutils literal"><span class="pre">form()</span></code></a> box,
+and differs from the latter by allowing field attributes to be
+specified.</p>
+<p>Each element of <em>elements</em> must itself be a sequence
+<code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">label</span></em><span class="pre">,</span> <em><span class="pre">yl</span></em><span class="pre">,</span> <em><span class="pre">xl</span></em><span class="pre">,</span> <em><span class="pre">item</span></em><span class="pre">,</span> <em><span class="pre">yi</span></em><span class="pre">,</span> <em><span class="pre">xi</span></em><span class="pre">,</span> <em><span class="pre">field_length</span></em><span class="pre">,</span>
+<em><span class="pre">input_length</span></em><span class="pre">,</span> <em><span class="pre">attributes</span></em><span class="pre">)</span></code> containing the various parameters
+concerning a given field and the associated label.</p>
+<p><em>attributes</em> is an integer interpreted as a bit mask with the
+following meaning (bit 0 being the least significant bit):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Bit number</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>the field should be hidden (e.g., a password)</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>the field should be read-only (e.g., a label)</td>
+</tr>
+</tbody>
+</table>
+<p>For all other parameters, please refer to the documentation of
+the <a class="reference internal" href="#dialog.Dialog.form" title="dialog.Dialog.form"><code class="xref py py-meth docutils literal"><span class="pre">form()</span></code></a> box.</p>
+<p>The return value is the same as would be with the <code class="xref py py-meth docutils literal"><span class="pre">form()</span></code>
+box, except that fields marked as read-only with bit 1 of
+<em>attributes</em> are also included in the output list.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="exceptions.html#dialog.BadPythonDialogUsage" title="dialog.BadPythonDialogUsage"><code class="xref py py-exc docutils literal"><span class="pre">BadPythonDialogUsage</span></code></a></li>
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id21">
+<img alt="_images/mixedform.png" src="_images/mixedform.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.mixedform" title="dialog.Dialog.mixedform"><code class="xref py py-meth docutils literal"><span class="pre">mixedform()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="password-form">
+<h3>Password form<a class="headerlink" href="#password-form" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.passwordform">
+<code class="descclassname">Dialog.</code><code class="descname">passwordform</code><span class="sig-paren">(</span><em>text</em>, <em>elements</em>, <em>height=0</em>, <em>width=0</em>, <em>form_height=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.passwordform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.passwordform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a form consisting of labels and invisible fields.</p>
+<p>This widget is identical to the <a class="reference internal" href="#dialog.Dialog.form" title="dialog.Dialog.form"><code class="xref py py-meth docutils literal"><span class="pre">form()</span></code></a> box, except that
+all text fields are treated as <a class="reference internal" href="#dialog.Dialog.passwordbox" title="dialog.Dialog.passwordbox"><code class="xref py py-meth docutils literal"><span class="pre">passwordbox()</span></code></a> widgets
+rather than <a class="reference internal" href="#dialog.Dialog.inputbox" title="dialog.Dialog.inputbox"><code class="xref py py-meth docutils literal"><span class="pre">inputbox()</span></code></a> widgets.</p>
+<p>By default (as in <strong class="program">dialog</strong>), nothing is echoed to the
+terminal as the user types in the invisible fields. This can be
+confusing to users. Use <code class="docutils literal"><span class="pre">insecure=True</span></code> (keyword argument) if
+you want an asterisk to be echoed for each character entered by
+the user.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="exceptions.html#dialog.BadPythonDialogUsage" title="dialog.BadPythonDialogUsage"><code class="xref py py-exc docutils literal"><span class="pre">BadPythonDialogUsage</span></code></a></li>
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id22">
+<img alt="_images/passwordform.png" src="_images/passwordform.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.passwordform" title="dialog.Dialog.passwordform"><code class="xref py py-meth docutils literal"><span class="pre">passwordform()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="selecting-files-and-directories">
+<h2>Selecting files and directories<a class="headerlink" href="#selecting-files-and-directories" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="directory-selection">
+<h3>Directory selection<a class="headerlink" href="#directory-selection" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.dselect">
+<code class="descclassname">Dialog.</code><code class="descname">dselect</code><span class="sig-paren">(</span><em>filepath</em>, <em>height=0</em>, <em>width=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.dselect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.dselect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a directory selection dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; initial path</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">path</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>path</em> is the directory chosen by the user.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The directory selection dialog displays a text entry window
+in which you can type a directory, and above that a window
+with directory names.</p>
+<p>Here, <em>filepath</em> can be a path to a file, in which case the
+directory window will display the contents of the path and the
+text entry window will contain the preselected directory.</p>
+<p>Use <code class="kbd docutils literal"><span class="pre">Tab</span></code> or the arrow keys to move between the windows.
+Within the directory window, use the <code class="kbd docutils literal"><span class="pre">Up</span></code> and <code class="kbd docutils literal"><span class="pre">Down</span></code>
+arrow keys to scroll the current selection. Use the <code class="kbd docutils literal"><span class="pre">Space</span></code>
+bar to copy the current selection into the text entry window.</p>
+<p>Typing any printable character switches focus to the text entry
+window, entering that character as well as scrolling the
+directory window to the closest match.</p>
+<p>Use <code class="kbd docutils literal"><span class="pre">Enter</span></code> or the <span class="guilabel">OK</span> button to accept the
+current value in the text entry window and exit.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id23">
+<img alt="_images/dselect.png" src="_images/dselect.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.dselect" title="dialog.Dialog.dselect"><code class="xref py py-meth docutils literal"><span class="pre">dselect()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="file-or-directory-selection">
+<h3>File or directory selection<a class="headerlink" href="#file-or-directory-selection" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.fselect">
+<code class="descclassname">Dialog.</code><code class="descname">fselect</code><span class="sig-paren">(</span><em>filepath</em>, <em>height=0</em>, <em>width=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.fselect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.fselect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a file selection dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; initial path</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">path</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>path</em> is the path chosen by the user (the last element of
+which may be a directory or a file).</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The file selection dialog displays a text entry window in
+which you can type a file name (or directory), and above that
+two windows with directory names and file names.</p>
+<p>Here, <em>filepath</em> can be a path to a file, in which case the file
+and directory windows will display the contents of the path and
+the text entry window will contain the preselected file name.</p>
+<p>Use <code class="kbd docutils literal"><span class="pre">Tab</span></code> or the arrow keys to move between the windows.
+Within the directory or file name windows, use the <code class="kbd docutils literal"><span class="pre">Up</span></code> and
+<code class="kbd docutils literal"><span class="pre">Down</span></code> arrow keys to scroll the current selection. Use the
+<code class="kbd docutils literal"><span class="pre">Space</span></code> bar to copy the current selection into the text
+entry window.</p>
+<p>Typing any printable character switches focus to the text entry
+window, entering that character as well as scrolling the
+directory and file name windows to the closest match.</p>
+<p>Use <code class="kbd docutils literal"><span class="pre">Enter</span></code> or the <span class="guilabel">OK</span> button to accept the
+current value in the text entry window, or the
+<span class="guilabel">Cancel</span> button to cancel.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id24">
+<img alt="_images/fselect.png" src="_images/fselect.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.fselect" title="dialog.Dialog.fselect"><code class="xref py py-meth docutils literal"><span class="pre">fselect()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="date-and-time">
+<h2>Date and time<a class="headerlink" href="#date-and-time" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="calendar">
+<h3>Calendar<a class="headerlink" href="#calendar" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.calendar">
+<code class="descclassname">Dialog.</code><code class="descname">calendar</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=0</em>, <em>day=-1</em>, <em>month=-1</em>, <em>year=-1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.calendar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.calendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a calendar dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box (minus the calendar height)</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+<li><strong>day</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; inititial day highlighted</li>
+<li><strong>month</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; inititial month displayed</li>
+<li><strong>year</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; inititial year selected</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">date</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>date</em> is a list of the form <code class="samp docutils literal"><span class="pre">[</span><em><span class="pre">day</span></em><span class="pre">,</span> <em><span class="pre">month</span></em><span class="pre">,</span>
+<em><span class="pre">year</span></em><span class="pre">]</span></code>, where <em>day</em>, <em>month</em> and <em>year</em> are integers
+corresponding to the date chosen by the user.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A <code class="xref py py-meth docutils literal"><span class="pre">calendar()</span></code> box displays day, month and year in
+separately adjustable windows. If <em>year</em> is given as <code class="docutils literal"><span class="pre">0</span></code>, the
+current date is used as initial value; otherwise, if any of the
+values for <em>day</em>, <em>month</em> and <em>year</em> is negative, the current
+date&#8217;s corresponding value is used. You can increment or
+decrement any of those using the <code class="kbd docutils literal"><span class="pre">Left</span></code>, <code class="kbd docutils literal"><span class="pre">Up</span></code>,
+<code class="kbd docutils literal"><span class="pre">Right</span></code> and <code class="kbd docutils literal"><span class="pre">Down</span></code> arrows. Use <code class="kbd docutils literal"><span class="pre">Tab</span></code> or
+<code class="kbd docutils literal"><span class="pre">Backtab</span></code> to move between windows.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=6,</span> <span class="pre">width=0</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></li>
+<li><a class="reference internal" href="exceptions.html#dialog.UnexpectedDialogOutput" title="dialog.UnexpectedDialogOutput"><code class="xref py py-exc docutils literal"><span class="pre">UnexpectedDialogOutput</span></code></a></li>
+<li><a class="reference internal" href="exceptions.html#dialog.PythonDialogReModuleError" title="dialog.PythonDialogReModuleError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogReModuleError</span></code></a></li>
+</ul>
+</div></blockquote>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 3.2: </span>The default values for <em>day</em>, <em>month</em> and <em>year</em> have been
+changed from <code class="docutils literal"><span class="pre">0</span></code> to <code class="docutils literal"><span class="pre">-1</span></code>.</p>
+</div>
+</dd></dl>
+
+<div class="figure align-center" id="id25">
+<img alt="_images/calendar.png" src="_images/calendar.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.calendar" title="dialog.Dialog.calendar"><code class="xref py py-meth docutils literal"><span class="pre">calendar()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="time-box">
+<h3>Time box<a class="headerlink" href="#time-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.timebox">
+<code class="descclassname">Dialog.</code><code class="descname">timebox</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>hour=-1</em>, <em>minute=-1</em>, <em>second=-1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.timebox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.timebox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a time dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+<li><strong>hour</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; inititial hour selected</li>
+<li><strong>minute</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; inititial minute selected</li>
+<li><strong>second</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; inititial second selected</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">time</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>time</em> is a list of the form <code class="samp docutils literal"><span class="pre">[</span><em><span class="pre">hour</span></em><span class="pre">,</span> <em><span class="pre">minute</span></em><span class="pre">,</span>
+<em><span class="pre">second</span></em><span class="pre">]</span></code>, where <em>hour</em>, <em>minute</em> and <em>second</em> are integers
+corresponding to the time chosen by the user.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#dialog.Dialog.timebox" title="dialog.Dialog.timebox"><code class="xref py py-meth docutils literal"><span class="pre">timebox()</span></code></a> is a dialog box which allows one to select an
+hour, minute and second. If any of the values for <em>hour</em>,
+<em>minute</em> and <em>second</em> is negative, the current time&#8217;s
+corresponding value is used. You can increment or decrement any
+of those using the <code class="kbd docutils literal"><span class="pre">Left</span></code>, <code class="kbd docutils literal"><span class="pre">Up</span></code>, <code class="kbd docutils literal"><span class="pre">Right</span></code> and
+<code class="kbd docutils literal"><span class="pre">Down</span></code> arrows. Use <code class="kbd docutils literal"><span class="pre">Tab</span></code> or <code class="kbd docutils literal"><span class="pre">Backtab</span></code> to move
+between windows.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=3,</span> <span class="pre">width=30</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></li>
+<li><a class="reference internal" href="exceptions.html#dialog.PythonDialogReModuleError" title="dialog.PythonDialogReModuleError"><code class="xref py py-exc docutils literal"><span class="pre">PythonDialogReModuleError</span></code></a></li>
+<li><a class="reference internal" href="exceptions.html#dialog.UnexpectedDialogOutput" title="dialog.UnexpectedDialogOutput"><code class="xref py py-exc docutils literal"><span class="pre">UnexpectedDialogOutput</span></code></a></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id26">
+<img alt="_images/timebox.png" src="_images/timebox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.timebox" title="dialog.Dialog.timebox"><code class="xref py py-meth docutils literal"><span class="pre">timebox()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="range-box">
+<h3>Range box<a class="headerlink" href="#range-box" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.rangebox">
+<code class="descclassname">Dialog.</code><code class="descname">rangebox</code><span class="sig-paren">(</span><em>text</em>, <em>height=0</em>, <em>width=0</em>, <em>min=None</em>, <em>max=None</em>, <em>init=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.rangebox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.rangebox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a range dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display above the actual range control</li>
+<li><strong>height</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; height of the box</li>
+<li><strong>width</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; width of the box</li>
+<li><strong>min</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; minimum value for the range control</li>
+<li><strong>max</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; maximum value for the range control</li>
+<li><strong>init</strong> (<a class="reference external" href="http://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) &#8211; initial value for the range control</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a tuple of the form <code class="samp docutils literal"><span class="pre">(</span><em><span class="pre">code</span></em><span class="pre">,</span> <em><span class="pre">val</span></em><span class="pre">)</span></code> where:</p>
+<ul class="simple">
+<li><em>code</em> is a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a>;</li>
+<li><em>val</em> is an integer: the value chosen by the user.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.5)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="xref py py-meth docutils literal"><span class="pre">rangebox()</span></code> dialog allows the user to select from a
+range of integers using a kind of slider. The range control
+shows the current value as a bar (like the <a class="reference internal" href="#gauge-widget"><span class="std std-ref">gauge dialog</span></a>).</p>
+<p>The <code class="kbd docutils literal"><span class="pre">Tab</span></code> and arrow keys move the cursor between the
+buttons and the range control. When the cursor is on the latter,
+you can change the value with the following keys:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="kbd docutils literal"><span class="pre">Left</span></code> and
+<code class="kbd docutils literal"><span class="pre">Right</span></code> arrows</td>
+<td>select a digit to modify</td>
+</tr>
+<tr class="row-odd"><td><code class="kbd docutils literal"><span class="pre">+</span></code> / <code class="kbd docutils literal"><span class="pre">-</span></code></td>
+<td>increment/decrement the
+selected digit by one unit</td>
+</tr>
+<tr class="row-even"><td><code class="kbd docutils literal"><span class="pre">0</span></code>–<code class="kbd docutils literal"><span class="pre">9</span></code></td>
+<td>set the selected digit to
+the given value</td>
+</tr>
+</tbody>
+</table>
+<p>Some keys are also recognized in all cursor positions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="kbd docutils literal"><span class="pre">Home</span></code> /
+<code class="kbd docutils literal"><span class="pre">End</span></code></td>
+<td>set the value to its minimum or
+maximum</td>
+</tr>
+<tr class="row-odd"><td><code class="kbd docutils literal"><span class="pre">Page</span> <span class="pre">Up</span></code> /
+<code class="kbd docutils literal"><span class="pre">Page</span> <span class="pre">Down</span></code></td>
+<td>decrement/increment the value so
+that the slider moves by one column</td>
+</tr>
+</tbody>
+</table>
+<p>This widget requires <strong class="program">dialog</strong> &gt;= 1.2-20121230.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.14.</span></p>
+</div>
+</dd></dl>
+
+<div class="figure align-center" id="id27">
+<img alt="_images/rangebox.png" src="_images/rangebox.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.rangebox" title="dialog.Dialog.rangebox"><code class="xref py py-meth docutils literal"><span class="pre">rangebox()</span></code></a> example</span></p>
+</div>
+</div>
+<div class="section" id="yes-no">
+<h3>Yes/No<a class="headerlink" href="#yes-no" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="dialog.Dialog.yesno">
+<code class="descclassname">Dialog.</code><code class="descname">yesno</code><span class="sig-paren">(</span><em>text</em>, <em>height=None</em>, <em>width=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dialog.html#Dialog.yesno"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dialog.Dialog.yesno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a yes/no dialog box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>text</strong> (<a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) &#8211; text to display in the box</li>
+<li><strong>height</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; height of the box</li>
+<li><strong>width</strong> (int or <code class="docutils literal"><span class="pre">None</span></code>) &#8211; width of the box</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a <a class="reference internal" href="glossary.html#term-dialog-exit-code"><span class="xref std std-term">Dialog exit code</span></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Display a dialog box containing <em>text</em> and two buttons labelled
+<span class="guilabel">Yes</span> and <span class="guilabel">No</span> by default.</p>
+<p>The box size is <em>height</em> rows by <em>width</em> columns. If <em>text</em> is
+too long to fit in one line, it will be automatically divided
+into multiple lines at appropriate places. <em>text</em> may also
+contain the substring <code class="docutils literal"><span class="pre">&quot;\n&quot;</span></code> or newline characters to control
+line breaking explicitly.</p>
+<p>This <code class="xref py py-meth docutils literal"><span class="pre">yesno()</span></code> dialog box is useful for asking questions
+that require the user to answer either &#8220;yes&#8221; or &#8220;no&#8221;. These are
+the default button labels, however they can be freely set with
+the <code class="docutils literal"><span class="pre">yes_label</span></code> and <code class="docutils literal"><span class="pre">no_label</span></code> keyword arguments. The user
+can switch between the buttons by pressing the <code class="kbd docutils literal"><span class="pre">Tab</span></code> key.</p>
+<p>Default values for the size parameters when the
+<a class="reference internal" href="Dialog_class_overview.html#autowidgetsize"><span class="std std-ref">autowidgetsize</span></a> option is disabled:
+<code class="docutils literal"><span class="pre">height=10,</span> <span class="pre">width=30</span></code>.</p>
+<p>Notable exceptions:</p>
+<blockquote>
+<div>any exception raised by <a class="reference internal" href="internals.html#dialog.Dialog._perform" title="dialog.Dialog._perform"><code class="xref py py-meth docutils literal"><span class="pre">Dialog._perform()</span></code></a></div></blockquote>
+</dd></dl>
+
+<div class="figure align-center" id="id28">
+<img alt="_images/yesno.png" src="_images/yesno.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="#dialog.Dialog.yesno" title="dialog.Dialog.yesno"><code class="xref py py-meth docutils literal"><span class="pre">yesno()</span></code></a> example</span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <code class="docutils literal"><span class="pre">Dialog</span></code> widgets</a><ul>
+<li><a class="reference internal" href="#displaying-multi-line-text">Displaying multi-line text</a><ul>
+<li><a class="reference internal" href="#message-box">Message box</a></li>
+<li><a class="reference internal" href="#text-box">Text box</a></li>
+<li><a class="reference internal" href="#scroll-box">Scroll box</a></li>
+<li><a class="reference internal" href="#edit-box">Edit box</a></li>
+<li><a class="reference internal" href="#progress-box">Progress box</a></li>
+<li><a class="reference internal" href="#program-box">Program box</a></li>
+<li><a class="reference internal" href="#tail-box">Tail box</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#displaying-transient-messages">Displaying transient messages</a><ul>
+<li><a class="reference internal" href="#info-box">Info box</a></li>
+<li><a class="reference internal" href="#pause">Pause</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#progress-meters">Progress meters</a><ul>
+<li><a class="reference internal" href="#regular-gauge">Regular gauge</a></li>
+<li><a class="reference internal" href="#mixed-gauge">Mixed gauge</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#list-like-widgets">List-like widgets</a><ul>
+<li><a class="reference internal" href="#build-list">Build list</a></li>
+<li><a class="reference internal" href="#check-list">Check list</a></li>
+<li><a class="reference internal" href="#menu">Menu</a></li>
+<li><a class="reference internal" href="#radio-list">Radio list</a></li>
+<li><a class="reference internal" href="#tree-view">Tree view</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#single-line-input-fields">Single-line input fields</a><ul>
+<li><a class="reference internal" href="#input-box">Input box</a></li>
+<li><a class="reference internal" href="#input-menu">Input menu</a></li>
+<li><a class="reference internal" href="#password-box">Password box</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forms">Forms</a><ul>
+<li><a class="reference internal" href="#form">Form</a></li>
+<li><a class="reference internal" href="#mixed-form">Mixed form</a></li>
+<li><a class="reference internal" href="#password-form">Password form</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#selecting-files-and-directories">Selecting files and directories</a><ul>
+<li><a class="reference internal" href="#directory-selection">Directory selection</a></li>
+<li><a class="reference internal" href="#file-or-directory-selection">File or directory selection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#date-and-time">Date and time</a><ul>
+<li><a class="reference internal" href="#calendar">Calendar</a></li>
+<li><a class="reference internal" href="#time-box">Time box</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a><ul>
+<li><a class="reference internal" href="#range-box">Range box</a></li>
+<li><a class="reference internal" href="#yes-no">Yes/No</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Dialog_class_overview.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">Dialog</span></code> class overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="DialogBackendVersion.html"
+                        title="next chapter">The <code class="xref py py-class docutils literal"><span class="pre">DialogBackendVersion</span></code> class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/widgets.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="DialogBackendVersion.html" title="The DialogBackendVersion class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Dialog_class_overview.html" title="Dialog class overview"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pythondialog 3.4.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2002-2016, Florent Rougon, Thomas Dickey.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

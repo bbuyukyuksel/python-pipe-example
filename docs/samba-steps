@@ -1,0 +1,24 @@
+1.)sudo hostnamectl set-hostname dc01
+2.)nano /etc/resolf.conf
+domain morukslab.net
+search morukslab.net
+
+morukslab.net 192.168.56.104
+
+3.)sudo nano /etc/hosts
+#127.0.1.1	dc01.<sambadomain>	dc01
+192.168.56.104	dc01.<sambadomain>	dc01
+
+4.)LDAP SOFT ile bağlanılacak pc'de hostdosyasına sambanın hostname + domain eklendi.
+192.168.56.104 dc01.morukslab.net
+
+
+#Ağa Dahil Edilecek PC için
+1.) /etc/resolf.conf
+nameserver <SAMBA SUNUCUSUNUN IP ADRESİ>
+
+2.) /etc/hosts
+<Samba Sunucusunun IP adresi> <Samba sunucusunun DNS'si>
+192.168.56.104	dc01.morukslab.net
+
+
