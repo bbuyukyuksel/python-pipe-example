@@ -13,8 +13,10 @@ morukslab.net 192.168.56.104
 192.168.56.104 dc01.morukslab.net
 
 
+
+
 #Ağa Dahil Edilecek PC için
-1.) /etc/resolf.conf
+1.) /etc/resolv.conf
 nameserver <SAMBA SUNUCUSUNUN IP ADRESİ>
 
 2.) /etc/hosts

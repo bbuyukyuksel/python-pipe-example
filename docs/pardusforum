@@ -1,0 +1,39 @@
+   config.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install -y libreadline-dev git build-essential libattr1-dev libblkid-dev libpam0g-dev autoconf gdb
+     apt-get install -y python-dev python-dnspython libacl1-dev pkg-config libpopt-dev libldap2-dev libcups2-dev
+     apt-get install -y dnsutils acl attr libbsd-dev docbook-xsl libgnutls28-dev
+     cd /usr/src
+     get_samba4=https://download.samba.org/pub/samba/stable/samba-4.8.4.tar.gz
+     wget -c ${get_samba4} --no-check-certificate
+     tar xvfz $(basename ${get_samba4})
+     cd $(basename ${get_samba4}|sed "s/.tar.gz//")
+     ./configure --with-ads --with-shared-modules=idmap_ad --enable-debug --enable-selftest --with-systemd --prefix=/opt/samba4
+     make
+     make install
+
+     echo '[Unit]
+Description=Samba4 AD DC Daemon
+After=syslog.target network.target
+ 
+[Service]
+Type=forking
+PIDFile=/opt/samba4/var/run/samba.pid
+LimitNOFILE=16384
+EnvironmentFile=-/etc/sysconfig/samba4
+ExecStart=/opt/samba4/sbin/samba $SAMBAOPTIONS
+ExecReload=/usr/bin/kill -HUP $MAINPID
+ 
+[Install]
+WantedBy=multi-user.target' > /etc/systemd/system/samba4.service
+
+     echo 'export PATH=$PATH:/opt/samba4/bin:/opt/samba4/sbin' >> /etc/profile
+     source /etc/profile
+   SHELL
+
+
+hostnamectl set-hostname dc001.parduslab.net
+samba-tool domain provision --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=PARDUSLAB.NET --domain=PARDUSLAB --adminpass=SambaPardus98
+systemctl daemon-reload
+systemctl enable samba4.service
+systemctl start samba4.service
